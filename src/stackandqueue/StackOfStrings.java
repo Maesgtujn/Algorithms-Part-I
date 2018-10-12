@@ -3,16 +3,40 @@ package stackandqueue;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class StackOfStrings {
+import java.util.Iterator;
+import java.util.ListIterator;
+
+public class StackOfStrings<Item> implements Iterable<Item>{
 
     private Node first = null;
 
+    @Override
+    public Iterator<Item> iterator() {
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<Item>{
+        private Node current = first;
+
+        public boolean hasNext(){
+            return current != null;
+        }
+        public void remove(){
+
+        }
+        public Item next(){
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+
     private class Node{
-        String item;
+        Item item;
         Node next;
     }
 
-    public void push(String item) {
+    public void push(Item item) {
         Node oldfirst = first;
         first = new Node();
         first.item = item;
@@ -20,8 +44,8 @@ public class StackOfStrings {
 
     }
 
-    public String pop() {
-        String item = first.item;
+    public Item pop() {
+        Item item = first.item;
         first = first.next;
         return item;
 
@@ -33,9 +57,9 @@ public class StackOfStrings {
 
     public static void main(String[] args){
 
-        StackOfStrings stack = new StackOfStrings();
+        StackOfStrings<Object> stack = new StackOfStrings<>();
         while (!StdIn.isEmpty()){
-            String s = StdIn.readString();
+            Object s = StdIn.readString();
             if (s.equals("-"))
                 StdOut.print(stack.pop());
             else
