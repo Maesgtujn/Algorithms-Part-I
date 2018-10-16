@@ -88,6 +88,7 @@ public class Deque<Item> implements Iterable<Item> {
             last = null;
         else
             first.prev = null;
+        n--;
         assert check();
         return item;
     }
@@ -134,7 +135,7 @@ public class Deque<Item> implements Iterable<Item> {
         }
         if (numberOfNodes != n )
             return false;
-        for (Node x = last; x !=null && numberOfNodes >= n; x = x.prev){
+        for (Node x = last; x !=null && numberOfNodes >= 0; x = x.prev){
             numberOfNodes--;
         }
         if (numberOfNodes != 0 )

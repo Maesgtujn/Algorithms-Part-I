@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f71c59e-05d8-4141-a97b-f4bb7efca04b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DequesandRandomizedQueues/Deque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DequesandRandomizedQueues/Deque.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,13 +17,13 @@
         <counts>
           <entry key="project.closed" value="5" />
           <entry key="project.open.time.10" value="2" />
-          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="2" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -44,29 +43,30 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="13" />
-          <entry key="java" value="9243" />
+          <entry key="java" value="9276" />
           <entry key="txt" value="59" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="9243" />
+          <entry key="JAVA" value="9276" />
           <entry key="PLAIN_TEXT" value="72" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.60032016">
+    <splitter split-orientation="horizontal" split-proportion="0.75739247">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/DequesandRandomizedQueues/Deque.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="558">
-                  <caret line="150" selection-start-line="150" selection-end-line="150" />
+                <state relative-caret-position="-1194">
+                  <caret line="91" column="12" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="12" />
                   <folding>
                     <element signature="imports" expanded="true" />
+                    <marker date="1539685907089" expanded="true" signature="3150:3328" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -79,7 +79,7 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/stackandqueue/LinkedQueueOfStrings.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="376">
+                <state relative-caret-position="366">
                   <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
                 </state>
               </provider>
@@ -140,6 +140,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -177,8 +179,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -210,7 +210,7 @@
     <configuration name="Deque" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="DequesandRandomizedQueues.Deque" />
       <module name="Percolation" />
-      <option name="PROGRAM_PARAMETERS" value="a b c - - -" />
+      <option name="VM_PARAMETERS" value="-ea" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -299,21 +299,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1600" y="-4" width="1920" height="1084" extended-state="6" />
+    <frame x="1599" y="-11" width="1922" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49921995" visible="true" weight="0.20384204" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49921995" visible="true" weight="0.20597652" />
       <window_info id="Structure" order="1" sideWeight="0.50078005" side_tool="true" weight="0.19263607" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6286019" weight="0.30648535" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49893278" weight="0.32217574" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6286019" weight="0.30125523" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49893278" visible="true" weight="0.32217574" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49893278" weight="0.2416318" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49839914" weight="0.32845187" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49733192" visible="true" weight="0.31380752" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49733192" weight="0.3131524" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.3713981" side_tool="true" weight="0.54916316" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4994664" weight="0.3294979" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -391,20 +392,33 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/DequesandRandomizedQueues/Deque.java</url>
-          <line>73</line>
+          <line>60</line>
           <properties />
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/DequesandRandomizedQueues/Deque.java</url>
-          <line>112</line>
-          <properties class="DequesandRandomizedQueues.Deque" method="check">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="14" />
+          <line>82</line>
+          <properties />
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="last" language="JAVA" />
+        <watch expression="((Deque)this).first" custom="DequesandRandomizedQueues.Deque" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>last</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/UF.java" />
@@ -576,20 +590,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DequesandRandomizedQueues/Deque.java">
+    <entry file="file://$PROJECT_DIR$/src/stackandqueue/LinkedQueueOfStrings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="150" selection-start-line="150" selection-end-line="150" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="366">
+          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stackandqueue/LinkedQueueOfStrings.java">
+    <entry file="file://$PROJECT_DIR$/src/DequesandRandomizedQueues/Deque.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+        <state relative-caret-position="-1194">
+          <caret line="91" column="12" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1539685907089" expanded="true" signature="3150:3328" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
