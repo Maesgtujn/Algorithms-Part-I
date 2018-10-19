@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.function.Consumer;
+
 
 public class Deque<Item> implements Iterable<Item> {
     private int n;          //  size of the deque
@@ -31,7 +31,6 @@ public class Deque<Item> implements Iterable<Item> {
      * @return
      */
     public boolean isEmpty(){
-        //TODO
         return (first == null || last == null);
     }
 
@@ -40,7 +39,6 @@ public class Deque<Item> implements Iterable<Item> {
      * @return
      */
     public int size(){
-        //TODO
         return n;
     }
 
@@ -49,7 +47,19 @@ public class Deque<Item> implements Iterable<Item> {
      * @param item
      */
     public void addFirst(Item item){
-        //TODO
+        if (item == null)
+            throw new IllegalArgumentException("Null argument");
+        Node oldfirst = first;
+        first = new Node();
+        first.item = item;
+        first.prev = null;
+        first.next = oldfirst;
+        if (isEmpty())
+            last = first;
+        else
+            oldfirst.prev = first;
+        n++;
+        assert check();
 
     }
 
@@ -79,7 +89,6 @@ public class Deque<Item> implements Iterable<Item> {
      * @return
      */
     public Item removeFirst(){
-        //TODO
         if (isEmpty())
             throw new NoSuchElementException("Deque is already null");
         Item item = first.item;
@@ -98,18 +107,44 @@ public class Deque<Item> implements Iterable<Item> {
      * @return
      */
     public Item removeLast(){
-        //TODO
-        return null;
+        if (isEmpty())
+            throw new NoSuchElementException("Deque is already null");
+        Item item = last.item;
+        last = last.prev;
+        if (isEmpty())
+            first = null;
+        else
+            last.next = null;
+        n--;
+        assert check();
+        return item;
     }
 
     /**
      * return an iterator over items in order from front to end
      * @return
      */
-    public Iterator<Item> iterator(){
-        //TODO
-        return null;
+    public Iterator<Item> iterator() {
+        return new DequeIterator();
     }
+
+    private class DequeIterator implements Iterator<Item> {
+        private Node current = first;
+        public boolean hasNext(){
+            return current != null;
+        }
+        public void remove(){
+            throw new UnsupportedOperationException();
+        }
+        public Item next() {
+            if (!hasNext())
+                throw new NoSuchElementException();
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+
 
     private boolean check() {
         if (n < 0){
@@ -138,9 +173,7 @@ public class Deque<Item> implements Iterable<Item> {
         for (Node x = last; x !=null && numberOfNodes >= 0; x = x.prev){
             numberOfNodes--;
         }
-        if (numberOfNodes != 0 )
-            return false;
-        return true;
+        return numberOfNodes == 0;
     }
 
     //  unit testing
