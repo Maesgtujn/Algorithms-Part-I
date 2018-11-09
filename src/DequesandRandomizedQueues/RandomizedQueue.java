@@ -134,6 +134,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
                     for (String x : queue)
                         StdOut.println("内层循环： " + x);
                 }
+                StdOut.println(queue.size());
+                StdOut.println(queue.a.length);
             }
         }
     }

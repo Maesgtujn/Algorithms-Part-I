@@ -1,60 +1,68 @@
 package Assign3_PatternRecognition;
 
-
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Arrays;
 
-public class BruteCollinearPoints {
+public class FastCollinearPoints {
 
     private int num = 0;
     private LineSegment[] segmentsArray;
-
     /**
-     * finds all line segments containing 4 points
+     * finds all line segments containing 4 or more points
      * @param points
      */
-    public BruteCollinearPoints(Point[] points){
+    public FastCollinearPoints(Point[] points){
         validate(points);
         int N = points.length;
 
         Arrays.sort(points);
-
-
+        /* validate the repeated points */
         for (int i = 0; i < N - 1; i++) {
             if (points[i].compareTo(points[i + 1]) == 0)
                 throw new IllegalArgumentException("contain a repeated point");
         }
 
-        segmentsArray = new LineSegment[4 * N];
+        segmentsArray = new LineSegment[N * 4];
 
-        for (int i = 0; i < N - 3; i++) {
-            for (int j = i + 1; j < N - 2; j++) {
-                for (int k = j + 1; k < N - 1; k++) {
-                    for (int t = k + 1; t < N; t++) {
+        for (int i = 0; i < N-3; i++){
 
-                        if (points[i].slopeTo(points[j]) == points[i].slopeTo(points[k]) &&
-                                points[i].slopeTo(points[j]) == points[i].slopeTo(points[t])) {
+            Point p = points[i];
 
-                            LineSegment lineSegment = new LineSegment(points[i], points[t]);
+            Point[] slopeOrderPoints = new Point[N];  //slopeOrder based on point p
+            System.arraycopy(points, 0, slopeOrderPoints, 0, N);
+
+            Arrays.sort(slopeOrderPoints, i+1, N, p.slopeOrder());
+
+            double flag = p.slopeTo(slopeOrderPoints[i+1]);
+            int n = 0;
+            for (int q = i+2; q < N; q++){
+                double slopePQ = p.slopeTo(slopeOrderPoints[q]);
+
+                if (slopePQ == flag ){
+                    n++;
+                    if (q == N-1){
+                        if (n >= 2){
+                            LineSegment lineSegment = new LineSegment(p, slopeOrderPoints[q]);
                             segmentsArray[num] = lineSegment;
                             num++;
                         }
-
                     }
-                }
-            }
-        }
-    }
 
-    private void validate(Point[] points){
-        if (points == null)
-            throw new IllegalArgumentException("array is null");
-        for (int i = 0; i < points.length; i++){
-            if (points[i] == null)
-                throw new IllegalArgumentException("point is null");
+                }
+                else {
+                    flag = slopePQ;
+                    if (n >= 2){
+                        LineSegment lineSegment = new LineSegment(p, slopeOrderPoints[q-1]);
+                        segmentsArray[num] = lineSegment;
+                        num++;
+                    }
+                    n = 0;
+                }
+
+            }
         }
     }
 
@@ -78,7 +86,14 @@ public class BruteCollinearPoints {
         }
         return null;
     }
-
+    private void validate(Point[] points){
+        if (points == null)
+            throw new IllegalArgumentException("array is null");
+        for (int i = 0; i < points.length; i++){
+            if (points[i] == null)
+                throw new IllegalArgumentException("point is null");
+        }
+    }
 
     public static void main(String[] args){
         In in =  new In(args[0]);
@@ -100,7 +115,7 @@ public class BruteCollinearPoints {
         StdDraw.show();
 
         //  print and draw the line segments
-        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+        FastCollinearPoints collinear = new FastCollinearPoints(points);
         if (collinear.segments() != null) {
             for (LineSegment segment : collinear.segments()) {
                 StdOut.println(segment);
