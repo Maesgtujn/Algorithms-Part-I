@@ -1,128 +1,145 @@
 package Assign3_PatternRecognition;
 
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Arrays;
 
 public class FastCollinearPoints {
 
-    private int num = 0;
+    private int numOfSegments = 0;
     private LineSegment[] segmentsArray;
+
     /**
      * finds all line segments containing 4 or more points
+     *
      * @param points
      */
-    public FastCollinearPoints(Point[] points){
+    public FastCollinearPoints(Point[] points) {
         validate(points);
-        int N = points.length;
+        int numOfPoints = points.length;
+        Point[] copyPoints = new Point[numOfPoints];
+        System.arraycopy(points, 0, copyPoints, 0, numOfPoints);
+        Arrays.sort(copyPoints);
 
-        Arrays.sort(points);
         /* validate the repeated points */
-        for (int i = 0; i < N - 1; i++) {
-            if (points[i].compareTo(points[i + 1]) == 0)
+        for (int i = 0; i < numOfPoints - 1; i++) {
+            if (copyPoints[i].compareTo(copyPoints[i + 1]) == 0)
                 throw new IllegalArgumentException("contain a repeated point");
         }
 
-        segmentsArray = new LineSegment[N * 4];
+        segmentsArray = new LineSegment[2];
 
-        for (int i = 0; i < N-3; i++){
+        for (int i = 0; i < numOfPoints - 3; i++) {
 
-            Point p = points[i];
+            Point p = copyPoints[i];
 
-            Point[] slopeOrderPoints = new Point[N];  //slopeOrder based on point p
-            System.arraycopy(points, 0, slopeOrderPoints, 0, N);
+            Point[] slopeOrderPoints = new Point[numOfPoints];    //slopeOrder based on point p
+            System.arraycopy(copyPoints, 0, slopeOrderPoints, 0, numOfPoints);
 
-            Arrays.sort(slopeOrderPoints, i+1, N, p.slopeOrder());
 
-            double flag = p.slopeTo(slopeOrderPoints[i+1]);
+//            Arrays.sort(slopeOrderPoints, i + 1, numOfPoints, p.slopeOrder());
+            Arrays.sort(slopeOrderPoints, p.slopeOrder());
+
+            double flag = p.slopeTo(slopeOrderPoints[1]);
             int n = 0;
-            for (int q = i+2; q < N; q++){
+            for (int q = 2; q < numOfPoints; q++) {
                 double slopePQ = p.slopeTo(slopeOrderPoints[q]);
 
-                if (slopePQ == flag ){
+                if (slopePQ == flag) {
                     n++;
-                    if (q == N-1){
-                        if (n >= 2){
-                            LineSegment lineSegment = new LineSegment(p, slopeOrderPoints[q]);
-                            segmentsArray[num] = lineSegment;
-                            num++;
-                        }
+                    if (q == numOfPoints - 1 && n >= 2 && p.compareTo(slopeOrderPoints[q - n]) < 0) {
+                        addSegment(new LineSegment(p, slopeOrderPoints[q]));
                     }
 
-                }
-                else {
+                } else {
                     flag = slopePQ;
-                    if (n >= 2){
-                        LineSegment lineSegment = new LineSegment(p, slopeOrderPoints[q-1]);
-                        segmentsArray[num] = lineSegment;
-                        num++;
+                    if (n >= 2 && p.compareTo(slopeOrderPoints[q - n - 1]) < 0) {
+                        addSegment(new LineSegment(p, slopeOrderPoints[q - 1]));
                     }
                     n = 0;
                 }
-
             }
+
         }
+    }
+
+
+
+    private void addSegment(LineSegment lineSegment) {
+        if (numOfSegments == segmentsArray.length)
+            resize(2 * segmentsArray.length);
+        segmentsArray[numOfSegments++] = lineSegment;
+    }
+
+    private void resize(int capacity) {
+        assert capacity >= numOfSegments;
+        LineSegment[] temp = new LineSegment[capacity];
+        System.arraycopy(segmentsArray, 0, temp, 0, numOfSegments);
+        segmentsArray = temp;
     }
 
     /**
      * the number of line segments
-     * @return
+     *
+     * @return number
      */
-    public int numberOfSegments(){
-        return num;
+    public int numberOfSegments() {
+        return numOfSegments;
     }
 
     /**
      * the line segments
-     * @return
+     *
+     * @return segment array
      */
-    public LineSegment[] segments(){
-        LineSegment[] lineSegments = new LineSegment[num];
-        if(num > 0) {
-            System.arraycopy(segmentsArray, 0, lineSegments, 0, num);
-            return lineSegments;
-        }
-        return null;
+    public LineSegment[] segments() {
+        LineSegment[] lineSegments = new LineSegment[numOfSegments];
+        System.arraycopy(segmentsArray, 0, lineSegments, 0, numOfSegments);
+        return lineSegments;
+
     }
-    private void validate(Point[] points){
+
+    private void validate(Point[] points) {
         if (points == null)
             throw new IllegalArgumentException("array is null");
-        for (int i = 0; i < points.length; i++){
-            if (points[i] == null)
+        for (Point point : points) {
+            if (point == null)
                 throw new IllegalArgumentException("point is null");
         }
     }
 
-    public static void main(String[] args){
-        In in =  new In(args[0]);
+    public static void main(String[] args) {
+        In in = new In(args[0]);
         int n = in.readInt();
         Point[] points = new Point[n];
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             int x = in.readInt();
             int y = in.readInt();
-            points[i] = new Point(x,y);
+            points[i] = new Point(x, y);
         }
 
-        //  draw the points
-        StdDraw.enableDoubleBuffering();
-        StdDraw.setXscale(0 ,32768);
-        StdDraw.setYscale(0, 32768);
-        for (Point p : points){
-            p.draw();
-        }
-        StdDraw.show();
-
-        //  print and draw the line segments
+        Long startTime1 = System.currentTimeMillis();
         FastCollinearPoints collinear = new FastCollinearPoints(points);
-        if (collinear.segments() != null) {
-            for (LineSegment segment : collinear.segments()) {
-                StdOut.println(segment);
-                segment.draw();
-            }
-            StdDraw.show();
-        }
 
+        for (LineSegment segment : collinear.segments()) {
+            StdOut.println(segment);
+        }
+        StdOut.println(collinear.segments().length);
+        Long endTime1 = System.currentTimeMillis();
+
+        StdOut.println("*************");
+
+        Long startTime2 = System.currentTimeMillis();
+        test collinear1 = new test(points);
+
+        for (LineSegment segment : collinear1.segments()) {
+            StdOut.println(segment);
+        }
+        StdOut.println(collinear.segments().length);
+        Long endTime2 = System.currentTimeMillis();
+
+        StdOut.println("我的执行时间：" + (endTime1 - startTime1) + "ms");
+        StdOut.println("他的执行时间：" + (endTime2 - startTime2) + "ms");
     }
 }
