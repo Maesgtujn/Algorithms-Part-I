@@ -11,6 +11,7 @@ package Assign5_KdTrees; /******************************************************
  *
  ******************************************************************************/
 
+import Assign3_PatternRecognition.Point;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.StdDraw;
@@ -23,15 +24,23 @@ public class NearestNeighborVisualizer {
         String filename = args[0];
         In in = new In(filename);
         PointSET brute = new PointSET();
-//        KdTree kdtree = new KdTree();
+        KdTree kdtree = new KdTree();
         while (!in.isEmpty()) {
             double x = in.readDouble();
             double y = in.readDouble();
             Point2D p = new Point2D(x, y);
-//            kdtree.insert(p);
+            kdtree.insert(p);
             brute.insert(p);
         }
-
+        StdDraw.clear();
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(0.01);
+        brute.draw();
+//        Point2D query = new Point2D(0.8, 0.2);
+//        StdDraw.setPenRadius(0.03);
+//        StdDraw.setPenColor(StdDraw.BLUE);
+//        kdtree.nearest(query).draw();
+//        StdDraw.show();
         // process nearest neighbor queries
         StdDraw.enableDoubleBuffering();
         while (true) {
@@ -55,9 +64,9 @@ public class NearestNeighborVisualizer {
 
             // draw in blue the nearest neighbor (using kd-tree algorithm)
             StdDraw.setPenColor(StdDraw.BLUE);
-//            kdtree.nearest(query).draw();
+            kdtree.nearest(query).draw();
             StdDraw.show();
-            StdDraw.pause(40);
+            StdDraw.pause(200);
         }
     }
 }
